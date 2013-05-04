@@ -35,12 +35,17 @@
                 $mult = 1;
             $valor = $mult*floatval($_POST['value']);
             $query = "INSERT INTO t_debts (id1,id1_name,id2,id2_name,valor) VALUES ('$id1', '$name1', '$id2', '$name2', '$valor')";
+						if ($mult == 1) $who = $id2;
+						else $who = $id1;
+						$q = mysql_query("UPDATE `youownme`.`t_user` SET valor_total = valor_total + {$valor} WHERE id='{$who}'");	
             if (!mysqli_query($conn,$query)) {
                 die('Error: ' . mysqli_error($conn));
             }
             echo "<a href=./>Voltar a pagina inicial</a>";
             mysqli_close($conn);
         }
+
+				//notificar nova divida
    }
 ?>
 

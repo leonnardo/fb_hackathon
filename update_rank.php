@@ -12,7 +12,7 @@
 
 	$bd = mysql_select_db($sql_database) or die();
 
-	$query = mysql_query("SELECT id1,id2,valor,data_inicio FROM `youownme`.`t_debts` WHERE status='0'");
+	$query = mysql_query("SELECT id1,id2,valor,data_inicio FROM `youownme`.`t_debts` WHERE status='1'");
 
 	$curr_time = date("d") + 30*date("m") + 365*date("Y");
 	//$cnt = array();

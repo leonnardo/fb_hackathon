@@ -15,33 +15,6 @@
 
         $bd = mysql_select_db($sql_database) or die();
 
-        $query = mysql_query("SELECT id1,id2,valor FROM `youownme`.`t_debts` WHERE id2={$user_id} AND status='0'");
-
-        //DIVIDAS PENDENTES//
-        if (mysql_num_rows($query) != 0) {
-            //here goes a popup clits
-            echo "Voce possui DIVIDAS PENDENTES!<br/>";
-            while ($res = mysql_fetch_array($query))
-            {
-                echo "Voce deve {$res['valor']} para {$res['id1']}<br/>";
-            }
-        }
-        //////////////////////
-
-        //DIVIDAS RECUSADAS//
-        $query = mysql_query("SELECT id1_name,id2_name,valor FROM `youownme`.`t_debts` WHERE id1={$user_id} AND status='-1'");
-
-        if (mysql_num_rows($query) != 0) {
-            //here goes a popup clits
-            echo "Voce possui DIVIDAS RECUSADAS!<br/>";
-            while ($res = mysql_fetch_array($query))
-            {
-                echo "{$res['id2_name']} recusou sua divida de {$res['valor']}<br/>";
-            }
-            mysql_query("DELETE * FROM `youownme`.`t_debts` WHERE id1={$user_id} AND status='-1'");
-        }
-        //////////////////////
-
         //SHOW CREDITOS
         $query = mysql_query("SELECT id1,id2,id1_name,id2_name,valor FROM `youownme`.`t_debts` WHERE ((id1={$user_id} AND valor>0) OR (id2={$user_id} AND valor<0)) AND status='1'");
 
