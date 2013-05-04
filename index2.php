@@ -56,17 +56,36 @@
        ref.parentNode.insertBefore(js, ref);
       }(document));
 
+      function findValue(array, key) {
+        for (var i = 0; i < array.length; i++) {
+          if (array[i] === key) return i;
+        }
+        return -1;
+      }
       // Here we run a very simple test of the Graph API after login is successful.
       // This testAPI() function is only called in those cases.
       function testAPI() {
-        arr = new Array();
+        nomes = new Array();
+        ids = new Array();
         FB.api('/me/friends', function(response) {
           for(i = 0; i < response.data.length; i++) {
-            arr.push(response.data[i].name);
+            nomes.push(response.data[i].name);
+            ids.push(response.data[i].id);
           }
           $("#nome").autocomplete({
-            source: arr,
-            select: function( event, ui) { $("#mostra").append("<p>Hello!!1!</p>") }
+            source: nomes,
+            select: function(event, ui) {
+                key = findValue(nomes,this.value);
+                if (key != -1) {
+                  var id = ids[key];
+                  var url = "https://graph.facebook.com/" + id + "/picture?type=normal";
+                  console.log(url);
+                  $("#mostra").html("<img src='" + url + "'>");
+                }
+                else {
+                  console.log("ops!");
+                }
+              }
           });
         });
       }
@@ -78,5 +97,5 @@
   <form>
     Nome: <input type="text" id="nome">
   </form>
-  <p id="mostra"></p>
+  <div id="mostra"></div>
 </body></html>
