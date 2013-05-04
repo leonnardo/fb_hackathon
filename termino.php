@@ -11,7 +11,8 @@
 
 	$bd = mysql_select_db($sql_database) or die();
 
-	$id = $_GET['id_term'];
+	$id = $_POST['id_term'];
+	echo $id;
 	$t = date('Y-m-d H:i:s');
 	mysql_query("UPDATE `youownme`.`t_debts` SET status='0',data_fim='{$t}' WHERE id='{$id}'");
 	$query = mysql_query("SELECT * FROM t_debts WHERE id={$id}");
@@ -22,8 +23,9 @@
 		if ($val < 0) $val *= -1;
 		if ($diff == 0) $new_rank = 10;
 		else $new_rank = min(100,$val/$diff);
+		$q = mysql_query("UPDATE t_user SET num_trans=num_trans+1,rank=({$res['rank']}+{$new_rank})/({$res['num_trans']}+1.0)");
 	}
-	$q = mysql_query("UPDATE t_user SET num_trans=num_trans+1,rank=({$res['rank']}+{$new_rank})/({$res['num_trans']}+1.0)");
+
 
 	//notificar fim da divida
 

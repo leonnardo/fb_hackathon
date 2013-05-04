@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Where's my Money?</title>
+    <title>You Owe Me!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -32,7 +32,7 @@
 
 	.btn-large{
 	font-size:20px;
-	width: 80px;
+	width: 400px;
 	padding: 15px;
 	margin: 20px;
 	}
@@ -82,7 +82,7 @@
         text-align: center;
       }
       .jumbotron h1 {
-        font-size: 80px;
+        font-size: 100px;
         line-height: 1;
       }
       .jumbotron .lead {
@@ -189,25 +189,9 @@
       -moz-border-radius: 0px;
       background-image: none;
 }
-
-#rig {
-  width: 360px;
-  float: right;
-}
 </style>
 <script>
  <!--
-
-       function removeDiv(id,id_div){
-          $(id_div).remove();
-          alert(id);
-          $.post('termino.php',
-            {'id_term':id},
-            function(response) {
-              alert(response);
-            });
-        //}
-       }
        function isNumberKey(evt)
        {
           var charCode = (evt.which) ? evt.which : event.keyCode;
@@ -341,7 +325,7 @@
             <div class="container">
               <ul class="nav">
                 <li class="active"><a href="casa.php">Home</a></li>
-                <li><a href="ranking.php">Ranking</a></li>
+                <li><a href="ranking.html">Ranking</a></li>
               </ul>
             </div>
           </div>
@@ -349,37 +333,31 @@
       </div>
 
 <div class ="container">
-  <div class="jumbotron"><img align="left" src="http://www.obrigadopelospeixes.com/wp-content/uploads/2012/11/stewie.gif" width="100px" alt="tt">
-<h1> Where's my money?!</h1><hr>
+  <div class="jumbotron">
+<h1> You Owe Me! </h1><hr>
 </div>
 
       <div class="row-fluid">
         <div class="span6">
           <h2 class="tb-title">Debts</h2>
 		<?php foreach($resultado_debitos as $value) { ?>
-    <div id="<?php echo "root".$value[0] ?>">
-    <div class="idv"><span class="idv-img"><img src="<?php echo "https://graph.facebook.com/$value[1]/picture?width=200&height=200"; ?>" class="img-polaroid prf" alt="img"></span>
-		<div class="idv-info" >
+    <div class="idv" id="test"><span class="idv-img"><img src="<?php echo "https://graph.facebook.com/$value[1]/picture?width=200&height=200"; ?>" class="img-polaroid prf" alt="img"></span>
+		<div class="idv-info">
       <span class="idv-name"><?php echo $value[2]; ?></span><br>
-      <span class="idv-debt"><?php $a = -1*$value[3]; echo "R\$$a"; ?></span>
-      <button class="btn-mini btn-danger" onclick="removeDiv(<?php echo intval($value[0]) ?>,<?php echo "root".$value[0] ?>);" type="button">Settled</button>
-      <br>
-      <span class="idv-date"><?php echo $value[4]; ?></span></div></div></div>
+      <span class="idv-debt"><?php $a = -1*$value[3]; echo "R\$$a"; ?></span><br>
+      <span class="idv-date"><?php echo $value[4]; ?></span></div></div>
     <?php } ?>
 
         </div>
 
-        <div id="rig" class="span6">
+        <div class="span6">
           <h2 class="tb-title">Credits</h2>
           <?php foreach($resultado_creditos as $value) { ?>
-             <div id="<?php echo "root".$value[0] ?>">
     <div class="idv" id="test"><span class="idv-img"><img src="<?php echo "https://graph.facebook.com/$value[1]/picture?width=200&height=200"; ?>" class="img-polaroid prf" alt="img"></span>
     <div class="idv-info">
       <span class="idv-name"><?php echo $value[2]; ?></span><br>
-      <span class="idv-credt"><?php echo "R\$$value[3]"; ?></span>
-<button class="btn-mini btn-success" onclick="removeDiv(<?php echo intval($value[0]) ?>,<?php echo "root".$value[0] ?>);" type="button">Settled</button>
-      <br>
-      <span class="idv-date"><?php echo $value[4]; ?></span></div></div></div>
+      <span class="idv-credt"><?php echo "R\$$value[3]"; ?></span><br>
+      <span class="idv-date"><?php echo $value[4]; ?></span></div></div>
     <?php } ?>
        </div>
       </div>
@@ -403,8 +381,8 @@
      		 <input type="text" id="value" name="value" onkeypress="return isNumberKey(event)" placeholder="How much?"><br>
   	    </fieldset>
         <div id="rdio">
-        <label class="radio"><input type="radio" name="optionsRadios" value="deve">Credit</label>
-        <label class="radio"><input type="radio" name="optionsRadios" value="devendo">Debt</label>
+        <label class="radio"><input type="radio" name="optionsRadios" value="deve">Debt</label>
+        <label class="radio"><input type="radio" name="optionsRadios" value="devendo">Credit</label>
         </div>
         </div>
             <div class="modal-footer">
@@ -413,7 +391,7 @@
   </form>
           </div>
           <div style="text-align: center">
-            <a data-toggle="modal" href="#myModal" class="btn btn-primary btn-large">New</a>
+            <a data-toggle="modal" href="#myModal" class="btn btn-primary btn-large">New Entry</a>
           </div>
 
     <!-- Footer
