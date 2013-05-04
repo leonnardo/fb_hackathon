@@ -8,13 +8,6 @@
 
   $facebook = new Facebook($config);
   $user_id = $facebook->getUser();
-  $conn = mysqli_connect("localhost","root","12345","youownme");
-  if (mysqli_connect_errno($conn)) {
-    echo "Falhou ao connectar no DB: " .  mysqli_connect_error();
-  }
-  else {
-    echo "Conectou nessa bagaça!<br />";
-  }
 ?>
   <html>
   <head></head>
