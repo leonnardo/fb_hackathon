@@ -27,13 +27,7 @@
         }
         if (!$_POST['value']) {
     ?>
-     <form action="<?php echo $str ?>" method="POST">
-        <input type="radio" name="type" value="deve">Esse canalha me deve!<br />
-        <input type="radio" name="type" value="devendo">Eu que sou o otário que tá devendo<br />
-        Quanto? <input type="text" name="value">
 
-        <input type="submit" value="Cobra esse canalha!">
-    </form>
     <?php
        } else {
             $conn = mysqli_connect("localhost","root","12345","youownme");

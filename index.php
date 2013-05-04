@@ -200,12 +200,10 @@
 
        function removeDiv(id,id_div){
           $(id_div).remove();
-          alert(id);
           $.post('termino.php',
             {'id_term':id},
-            function(response) {
-              alert(response);
-            });
+            function(response) {}
+            );
         //}
        }
        function isNumberKey(evt)
